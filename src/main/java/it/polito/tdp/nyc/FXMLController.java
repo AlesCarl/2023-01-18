@@ -6,6 +6,8 @@ package it.polito.tdp.nyc;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.nyc.model.Hotspot;
 import it.polito.tdp.nyc.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +36,7 @@ public class FXMLController {
     private Button btnPercorso; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbProvider"
-    private ComboBox<?> cmbProvider; // Value injected by FXMLLoader
+    private ComboBox<String> cmbProvider; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtDistanza"
     private TextField txtDistanza; // Value injected by FXMLLoader
@@ -46,20 +48,52 @@ public class FXMLController {
     private TextField txtStringa; // Value injected by FXMLLoader
     
     @FXML // fx:id="txtTarget"
-    private ComboBox<?> txtTarget; // Value injected by FXMLLoader
+    private ComboBox<String> txtTarget; // Value injected by FXMLLoader
 
     @FXML
     void doAnalisiGrafo(ActionEvent event) {
     	
-    }
+    	int gradoMax= model.analisiGrafo();
+    	//this.txtResult.appendText("\nGrado max: "+gradoMax ) ;
+
+    
+    	for(String ss: model.getListGradoMax()) {
+        	this.txtResult.appendText("\n"+ss+"  --  Grado: "+gradoMax );
+    	}
+        
+    	}
+ 
+    	
+    
 
     @FXML
     void doCalcolaPercorso(ActionEvent event) {
+    	
+    	String target = this.txtTarget.getValue(); 
+    	String stringa= this.txtStringa.getText(); 
+    	
+    	this.txtResult.appendText("\nCAMMINO ACICLICLO TROVATO FINO A : "+target);
+    	for(String ss: model.camminoAciclico(target, stringa)) {
+    		this.txtResult.appendText("\n"+ss);
+    	}
     	
     }
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
+    	Double distanza = Double.parseDouble(this.txtDistanza.getText()); 
+    	String provider= this.cmbProvider.getValue(); 
+    	
+    	model.creaGrafo(provider,distanza);
+    	this.txtResult.appendText("Numero vertici: "+model.getVertici());
+    	this.txtResult.appendText("\nNumero archi : "+model.getNumEdges());
+
+    	//   TRY/CATCH 
+    	
+    	for(String ss: model.getVerticiCmb()) {
+    		this.txtTarget.getItems().add(ss); 
+    	}
     	
     }
 
@@ -77,5 +111,24 @@ public class FXMLController {
 
     public void setModel(Model model) {
     	this.model = model;
+    	this.setCmbox();
     }
+    
+    public void setCmbox() {
+    	
+    	for(String s: model.getAllProvider() ) {
+   	     this.cmbProvider.getItems().add(s); 
+   	 }	
+    	
+    }
+    
+    
+    
 }
+
+
+
+
+
+
+
