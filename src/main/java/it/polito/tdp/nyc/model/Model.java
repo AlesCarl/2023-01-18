@@ -1,7 +1,6 @@
 package it.polito.tdp.nyc.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -21,9 +20,9 @@ import it.polito.tdp.nyc.db.NYCDao;
     	
     	 NYCDao dao =new NYCDao() ;
          private SimpleWeightedGraph<String, DefaultWeightedEdge> graph;  // SEMPLICE, PESATO, NON ORIENTATO
-         private List<String> allLocation; 
- 		 int gradoMax; 
-
+         private List<String> allLocation ; 
+ 		 int gradoMax ; 
+// prova altro
 
     	
     	 
