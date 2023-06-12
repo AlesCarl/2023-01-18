@@ -179,9 +179,9 @@ import it.polito.tdp.nyc.db.NYCDao;
 			  
 			  /** 3. aggiungo String da successori in parziale */   
 
-			  List<String> successori= Graphs.neighborListOf(graph, current);
+			  List<String> successori= Graphs.successorListOf(graph, current);
 			  
-			  //?????? ???????     oppure successorListOf    ??????? ?????? ????? 
+			  //?????? ???????     oppure successorListOf    ??????? ?????? ????? neighborListOf
 			
 
 			  for(String ss: successori) {
@@ -190,23 +190,19 @@ import it.polito.tdp.nyc.db.NYCDao;
 				   ricorsione(parziale, totLocalita,localitaTarget,s ); 	
 				   parziale.remove(ss);
 				  }
-			  }	  
-			  
-			
-				  
+			    }	    
 			  }
 			
 		
 		
-		
-		
-		
-		private String verticeCasuale() {
-		 Random random = new Random();
-		 int randomIndex = random.nextInt(vertexGradoMax.size());
-		 return vertexGradoMax.get(randomIndex);
+		/** DEFINITIVO */ 
+		private String verticeCasuale() {		 
+		 
+		 int n = (int) (Math.random() * this.vertexGradoMax.size());
+		 return vertexGradoMax.get(n);
 
 	}
+		
 
 		public List<String> getListGradoMax() {
 			return vertexGradoMax; 
