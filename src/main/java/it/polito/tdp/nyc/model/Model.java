@@ -136,6 +136,8 @@ import it.polito.tdp.nyc.db.NYCDao;
 			  
 			  percorsoOttimale= new ArrayList<String>(); 
 			  
+			 
+			  
 			  
 			  ricorsione( parziale, totLocalita,localitaTarget,s ); 
 			  
@@ -185,6 +187,7 @@ import it.polito.tdp.nyc.db.NYCDao;
 			
 
 			  for(String ss: successori) {
+				  
 				  if(!parziale.contains(ss) && !ss.contains(s)) { 
 				   parziale.add(ss); 
 				   ricorsione(parziale, totLocalita,localitaTarget,s ); 	
